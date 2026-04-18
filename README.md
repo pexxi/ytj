@@ -1,16 +1,16 @@
 # @pexxi/ytj
 
-CLI and library for the Finnish YTJ (Business Information System) open data API.
+CLI and Agent skill for the Finnish YTJ (Business Information System) open data API.
 
 ## Usage with npx
 
 Run any command without installing:
 
 ```bash
-npx @pexxi/ytj search --name "Gofore" --format table
-npx @pexxi/ytj get 1710128-9 --format table
+npx @pexxi/ytj search --name "Gofore"
+npx @pexxi/ytj get 1710128-9
 npx @pexxi/ytj codes YRMU --lang fi
-npx @pexxi/ytj postcodes --lang fi --format table
+npx @pexxi/ytj postcodes --lang fi
 ```
 
 ## Global Install
@@ -31,7 +31,7 @@ ytj get 1710128-9
 ### search -- Search companies
 
 ```bash
-ytj search --name "Gofore" --format table
+ytj search --name "Gofore"
 ytj search --location "Helsinki" --company-form OY
 ytj search --business-line "62100" --page 2
 ytj search --post-code "00100"
@@ -48,20 +48,20 @@ ytj search --reg-start 2024-01-01 --reg-end 2024-12-31
 | `--reg-start <date>` | Registration date start (yyyy-mm-dd) |
 | `--reg-end <date>` | Registration date end (yyyy-mm-dd) |
 | `-p, --page <number>` | Page number for pagination |
-| `-f, --format <format>` | Output format: `json` (default) or `table` |
+| `-f, --format <format>` | Output format: `table` (default), `compact`, or `json` |
 
 ### get -- Get company by business ID
 
 ```bash
 ytj get 1710128-9
-ytj get 1710128-9 --format table
+ytj get 1710128-9 --format compact
 ```
 
 Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
 
 | Option | Description |
 |--------|-------------|
-| `-f, --format <format>` | Output format: `json` (default) or `table` |
+| `-f, --format <format>` | Output format: `table` (default), `compact`, or `json` |
 
 ### codes -- Get code list descriptions
 
@@ -79,13 +79,13 @@ Valid codes: `YRMU`, `REK_KDI`, `TLAJI`, `SELTILA`, `REK`, `VIRANOM`, `TLAHDE`, 
 ### postcodes -- Get postal codes
 
 ```bash
-ytj postcodes --lang fi --format table
+ytj postcodes --lang fi
 ```
 
 | Option | Description |
 |--------|-------------|
 | `-l, --lang <lang>` | Language: `fi` (default), `sv`, `en` |
-| `-f, --format <format>` | Output format: `json` (default) or `table` |
+| `-f, --format <format>` | Output format: `table` (default), `compact`, or `json` |
 
 ## Library Usage
 

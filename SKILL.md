@@ -16,15 +16,15 @@ The `ytj` CLI must be installed: `npm install -g @pexxi/ytj`
 ### Search companies by name
 
 ```bash
-ytj search --name "Company Name" --format table
+ytj search --name "Company Name" --format compact
 ```
 
-Options: `--name`, `--location`, `--company-form`, `--business-line`, `--post-code`, `--reg-start`, `--reg-end`, `--page`, `--format (json|table)`
+Options: `--name`, `--location`, `--company-form`, `--business-line`, `--post-code`, `--reg-start`, `--reg-end`, `--page`, `--format (compact|table|json)`
 
 ### Get company by business ID (Y-tunnus)
 
 ```bash
-ytj get 1710128-9 --format table
+ytj get 1710128-9 --format compact
 ```
 
 Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
@@ -42,7 +42,7 @@ Languages: fi, sv, en.
 ### Get postal codes
 
 ```bash
-ytj postcodes --lang fi --format table
+ytj postcodes --lang fi --format compact
 ```
 
 ## When to use
@@ -52,9 +52,13 @@ ytj postcodes --lang fi --format table
 - User wants to find companies by location, form, or industry
 - User asks about Finnish Trade Register data
 
-## Output
+## Output format guidelines
 
-Use `--format json` (default) when you need structured data for further processing. Use `--format table` for human-readable display.
+Always use `--format compact` unless the user explicitly needs structured data for programmatic processing -- then use `--format json`.
+
+- **compact**: Minimal, borderless text. Best for answering questions -- low token cost, easy to parse.
+- **json**: Full structured data with all fields. Use only when the user needs raw data for scripting or further processing.
+- **table**: Human-readable ASCII table. Not recommended for agent use (border characters waste tokens).
 
 ## Data attribution
 

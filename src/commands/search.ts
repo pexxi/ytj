@@ -1,5 +1,5 @@
 import { YtjClient } from "../client.js";
-import { formatCompaniesTable } from "../formatter.js";
+import { formatCompaniesTable, formatCompaniesCompact } from "../formatter.js";
 
 interface SearchOptions {
   name?: string;
@@ -22,9 +22,11 @@ export async function searchCommand(options: SearchOptions): Promise<void> {
     page: options.page ? parseInt(options.page, 10) : undefined,
   });
 
-  if (options.format === "table") {
-    console.log(formatCompaniesTable(result.companies, result.totalResults));
-  } else {
+  if (options.format === "compact") {
+    console.log(formatCompaniesCompact(result.companies, result.totalResults));
+  } else if (options.format === "json") {
     console.log(JSON.stringify(result, null, 2));
+  } else {
+    console.log(formatCompaniesTable(result.companies, result.totalResults));
   }
 }
