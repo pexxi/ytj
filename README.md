@@ -121,7 +121,7 @@ All responses are validated with Zod and fully typed.
 Install the YTJ lookup skill for Claude Code or other AI coding agents:
 
 ```bash
-npx skills add pexxi/ytj-cli
+npx skills add pexxi/ytj
 ```
 
 ## Data License
