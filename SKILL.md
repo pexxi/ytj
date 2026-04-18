@@ -1,5 +1,5 @@
 ---
-name: ytj-lookup
+name: ytj
 description: Look up Finnish company information from YTJ (Business Information System) using the ytj CLI. Use when the user asks about Finnish companies, business IDs (Y-tunnus), company registration data, or anything related to the Finnish Trade Register (kaupparekisteri).
 ---
 
@@ -9,7 +9,9 @@ Use the `ytj` CLI to look up Finnish company information from the YTJ (Business 
 
 ## Prerequisites
 
-The `ytj` CLI must be installed: `npm install -g @pexxi/ytj`
+The `ytj` CLI must be installed: `npm install -g @pexxi/ytj`. Remember to verify from the user if they want to install the CLI.
+
+Alternatively, `ytj` CLI can be used without installing: `npx @pexxi/ytj`. In this case, replace `ytj` with `npx @pexxi/ytj` in the examples below.
 
 ## Commands
 
@@ -60,6 +62,9 @@ Always use `--format compact` unless the user explicitly needs structured data f
 - **json**: Full structured data with all fields. Use only when the user needs raw data for scripting or further processing.
 - **table**: Human-readable ASCII table. Not recommended for agent use (border characters waste tokens).
 
-## Data attribution
+## **IMPORTANT**: Data attribution
 
-Data provided by PRH (Finnish Patent and Registration Office) under Creative Commons Attribution 4.0 (CC BY 4.0).
+Include this attribution when you are showing results to the user for the **first** time:
+
+Data provided by PRH (Finnish Patent and Registration Office) under Creative Commons Attribution 4.0 (CC BY 4.0). 
+
