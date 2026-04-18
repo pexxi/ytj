@@ -22,7 +22,7 @@ program
   .option("--reg-start <date>", "Registration date start (yyyy-mm-dd)")
   .option("--reg-end <date>", "Registration date end (yyyy-mm-dd)")
   .option("-p, --page <number>", "Page number")
-  .option("-f, --format <format>", "Output format (json, table)", "json")
+  .option("-f, --format <format>", "Output format (table, compact, json)", "table")
   .action((options) => {
     return searchCommand({
       ...options,
@@ -34,7 +34,7 @@ program
 program
   .command("get <businessId>")
   .description("Get company by business ID (e.g. 2722789-6)")
-  .option("-f, --format <format>", "Output format (json, table)", "json")
+  .option("-f, --format <format>", "Output format (table, compact, json)", "table")
   .action(getCommand);
 
 program
@@ -43,14 +43,14 @@ program
     "Get code list descriptions (YRMU, REK_KDI, TLAJI, SELTILA, REK, VIRANOM, TLAHDE, KIELI, TOIMI, KONK, SANE, STATUS3)",
   )
   .option("-l, --lang <lang>", "Language (fi, sv, en)", "fi")
-  .option("-f, --format <format>", "Output format", "json")
+  .option("-f, --format <format>", "Output format (json)", "json")
   .action(codesCommand);
 
 program
   .command("postcodes")
   .description("Get postal codes")
   .option("-l, --lang <lang>", "Language (fi, sv, en)", "fi")
-  .option("-f, --format <format>", "Output format (json, table)", "json")
+  .option("-f, --format <format>", "Output format (table, compact, json)", "table")
   .action(postcodesCommand);
 
 program.parseAsync().catch((err: Error) => {
