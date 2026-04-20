@@ -1,5 +1,6 @@
 import {
   CompanySearchResponseSchema,
+  CompanySearchResponseRelaxedSchema,
   PostCodesResponseSchema,
   type Company,
   type CompanySearchResponse,
@@ -8,6 +9,47 @@ import {
 } from "./schemas.js";
 
 const BASE_URL = "https://avoindata.prh.fi/opendata-ytj-api/v3";
+
+function filterRawCompanies(
+  companies: unknown[],
+  params: SearchParams,
+): unknown[] {
+  const locationNeedle = params.location?.trim().toLowerCase();
+  const postCodeNeedle = params.postCode?.trim();
+
+  return companies.filter((c) => {
+    if (!c || typeof c !== "object") return false;
+    const company = c as Record<string, unknown>;
+
+    if (!params.includeInactive && company.endDate) return false;
+
+    if (locationNeedle || postCodeNeedle) {
+      const addresses = Array.isArray(company.addresses) ? company.addresses : [];
+      const matchesLocation = locationNeedle
+        ? addresses.some((a) => {
+            const offices = Array.isArray((a as { postOffices?: unknown }).postOffices)
+              ? ((a as { postOffices: unknown[] }).postOffices)
+              : [];
+            return offices.some(
+              (o) =>
+                typeof (o as { city?: unknown }).city === "string" &&
+                ((o as { city: string }).city).toLowerCase() === locationNeedle,
+            );
+          })
+        : true;
+      if (!matchesLocation) return false;
+
+      const matchesPostCode = postCodeNeedle
+        ? addresses.some(
+            (a) => (a as { postCode?: unknown }).postCode === postCodeNeedle,
+          )
+        : true;
+      if (!matchesPostCode) return false;
+    }
+
+    return true;
+  });
+}
 
 export class YtjApiError extends Error {
   constructor(
@@ -55,7 +97,16 @@ export class YtjClient {
     }
 
     const data = await res.json();
-    return CompanySearchResponseSchema.parse(data);
+
+    if (Array.isArray(data?.companies)) {
+      data.companies = filterRawCompanies(data.companies, params);
+      data.totalResults = data.companies.length;
+    }
+
+    const schema = params.includeInactive
+      ? CompanySearchResponseRelaxedSchema
+      : CompanySearchResponseSchema;
+    return schema.parse(data);
   }
 
   async getCompany(businessId: string): Promise<Company> {
@@ -65,7 +116,7 @@ export class YtjClient {
       );
     }
 
-    const result = await this.searchCompanies({ businessId });
+    const result = await this.searchCompanies({ businessId, includeInactive: true });
 
     if (result.companies.length === 0) {
       throw new Error(`No company found with business ID: ${businessId}`);

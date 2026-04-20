@@ -36,18 +36,24 @@ ytj search --location "Helsinki" --company-form OY
 ytj search --business-line "62100" --page 2
 ytj search --post-code "00100"
 ytj search --reg-start 2024-01-01 --reg-end 2024-12-31
+ytj search --name "Kokko" --all
 ```
+
+By default, `search` returns only active companies (those without an `endDate`). Use `--all` to include ceased companies as well; in that mode the schema is relaxed to a best-effort parse so old records with missing fields still come through.
+
+`--location` and `--post-code` are also enforced client-side against the returned addresses, narrowing fuzzy API matches to exact address hits.
 
 | Option | Description |
 |--------|-------------|
 | `-n, --name <name>` | Company name (current, previous, parallel, or auxiliary) |
-| `-l, --location <location>` | Town or city |
+| `-l, --location <location>` | Town or city (also filtered client-side against address post-office city) |
 | `--company-form <form>` | Company form code (e.g. OY, OYJ, KY, OK) |
 | `--business-line <line>` | Main business line (TOL 2008 code or text) |
-| `--post-code <code>` | Postal code |
+| `--post-code <code>` | Postal code (also filtered client-side against address postal code) |
 | `--reg-start <date>` | Registration date start (yyyy-mm-dd) |
 | `--reg-end <date>` | Registration date end (yyyy-mm-dd) |
 | `-p, --page <number>` | Page number for pagination |
+| `-a, --all` | Include inactive (ceased) companies, using relaxed best-effort validation |
 | `-f, --format <format>` | Output format: `table` (default), `compact`, or `json` |
 
 ### get -- Get company by business ID
@@ -98,14 +104,17 @@ import { YtjClient } from "@pexxi/ytj";
 
 const client = new YtjClient();
 
-// Search companies
+// Search companies (active only by default)
 const result = await client.searchCompanies({ name: "Gofore" });
 console.log(result.totalResults);
-console.log(result.companies[0].businessId.value);
+console.log(result.companies[0].businessId?.value);
 
-// Get single company by business ID
+// Include inactive (ceased) companies with relaxed validation
+const all = await client.searchCompanies({ name: "Kokko", includeInactive: true });
+
+// Get single company by business ID (relaxed validation — works for ceased companies too)
 const company = await client.getCompany("1710128-9");
-console.log(company.names[0].name);
+console.log(company.names?.[0]?.name);
 
 // Get code descriptions
 const codes = await client.getDescriptions("YRMU", "fi");
@@ -114,7 +123,7 @@ const codes = await client.getDescriptions("YRMU", "fi");
 const postCodes = await client.getPostCodes("fi");
 ```
 
-All responses are validated with Zod and fully typed.
+All responses are validated with Zod and fully typed. Active-only searches use a strict schema; when `includeInactive: true` (or via `getCompany`) a relaxed schema is used where every field is optional, so old records with missing data still parse.
 
 ## Agent Skill
 
