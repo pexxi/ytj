@@ -46,7 +46,8 @@
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"ytj": "node dist/cli.js"
 	},
 	"dependencies": {
 		"cli-table3": "^0.6.5",
