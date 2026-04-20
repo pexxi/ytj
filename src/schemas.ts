@@ -101,12 +101,29 @@ export const CompanySchema = z.object({
   status: z.string(),
   registrationDate: z.string().nullable().optional(),
   endDate: z.string().nullable().optional(),
-  lastModified: z.string(),
+  lastModified: z.string().nullable().optional(),
 });
 
 export const CompanySearchResponseSchema = z.object({
   totalResults: z.number(),
   companies: z.array(CompanySchema),
+});
+
+export const CompanyRelaxedSchema = CompanySchema.partial().extend({
+  businessId: BusinessIdSchema.partial().optional(),
+  euId: EuIdSchema.partial().optional(),
+  names: z.array(CompanyNameSchema.partial()).optional(),
+  mainBusinessLine: MainBusinessLineSchema.partial().optional(),
+  website: WebsiteSchema.partial().optional(),
+  companyForms: z.array(CompanyFormSchema.partial()).optional(),
+  companySituations: z.array(CompanySituationSchema.partial()).optional(),
+  registeredEntries: z.array(RegisteredEntrySchema.partial()).optional(),
+  addresses: z.array(AddressSchema.partial()).optional(),
+});
+
+export const CompanySearchResponseRelaxedSchema = z.object({
+  totalResults: z.number(),
+  companies: z.array(CompanyRelaxedSchema),
 });
 
 export const PostCodeEntrySchema = z.object({
@@ -121,8 +138,8 @@ export const PostCodesResponseSchema = z.array(PostCodeEntrySchema);
 
 // Inferred types
 export type DescriptionEntry = z.infer<typeof DescriptionEntrySchema>;
-export type Company = z.infer<typeof CompanySchema>;
-export type CompanySearchResponse = z.infer<typeof CompanySearchResponseSchema>;
+export type Company = z.infer<typeof CompanyRelaxedSchema>;
+export type CompanySearchResponse = z.infer<typeof CompanySearchResponseRelaxedSchema>;
 export type PostCodeEntry = z.infer<typeof PostCodeEntrySchema>;
 
 export interface SearchParams {
@@ -137,4 +154,5 @@ export interface SearchParams {
   businessIdRegistrationStart?: string;
   businessIdRegistrationEnd?: string;
   page?: number;
+  includeInactive?: boolean;
 }

@@ -9,6 +9,7 @@ interface SearchOptions {
   postCode?: string;
   page?: string;
   format: string;
+  includeInactive?: boolean;
 }
 
 export async function searchCommand(options: SearchOptions): Promise<void> {
@@ -20,6 +21,7 @@ export async function searchCommand(options: SearchOptions): Promise<void> {
     mainBusinessLine: options.businessLine,
     postCode: options.postCode,
     page: options.page ? parseInt(options.page, 10) : undefined,
+    includeInactive: options.includeInactive,
   });
 
   if (options.format === "compact") {

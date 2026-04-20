@@ -22,12 +22,14 @@ program
   .option("--reg-start <date>", "Registration date start (yyyy-mm-dd)")
   .option("--reg-end <date>", "Registration date end (yyyy-mm-dd)")
   .option("-p, --page <number>", "Page number")
+  .option("-a, --all", "Include inactive (ceased) companies (relaxed validation)", false)
   .option("-f, --format <format>", "Output format (table, compact, json)", "table")
   .action((options) => {
     return searchCommand({
       ...options,
       registrationDateStart: options.regStart,
       registrationDateEnd: options.regEnd,
+      includeInactive: options.all,
     });
   });
 

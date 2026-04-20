@@ -21,7 +21,11 @@ Alternatively, `ytj` CLI can be used without installing: `npx @pexxi/ytj`. In th
 ytj search --name "Company Name" --format compact
 ```
 
-Options: `--name`, `--location`, `--company-form`, `--business-line`, `--post-code`, `--reg-start`, `--reg-end`, `--page`, `--format (compact|table|json)`
+Options: `--name`, `--location`, `--company-form`, `--business-line`, `--post-code`, `--reg-start`, `--reg-end`, `--page`, `--all`, `--format (compact|table|json)`
+
+By default, only active companies are returned. Add `--all` to include ceased companies (uses relaxed validation tolerant of missing fields).
+
+`--location` and `--post-code` are also enforced client-side against returned address data, so only companies with an exact matching address pass through.
 
 ### Get company by business ID (Y-tunnus)
 
