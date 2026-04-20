@@ -1,57 +1,65 @@
 {
-  "name": "@pexxi/ytj",
-  "version": "0.1.0",
-  "description": "CLI and library for the Finnish YTJ Business Information System API. Data provided by PRH (Finnish Patent and Registration Office) under CC BY 4.0.",
-  "type": "module",
-  "bin": {
-    "ytj": "./dist/cli.js"
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit"
-  },
-  "keywords": [
-    "ytj",
-    "prh",
-    "finnish",
-    "business",
-    "company",
-    "trade-register",
-    "open-data",
-    "cli"
-  ],
-  "author": "",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
-  "dependencies": {
-    "cli-table3": "^0.6.5",
-    "commander": "^14.0.3",
-    "zod": "^4.3.6"
-  },
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
-  }
+	"name": "@pexxi/ytj",
+	"version": "0.1.0",
+	"description": "CLI and library for the Finnish YTJ Business Information System API. Data provided by PRH (Finnish Patent and Registration Office) under CC BY 4.0.",
+	"keywords": [
+		"ytj",
+		"prh",
+		"finnish",
+		"business",
+		"company",
+		"trade-register",
+		"open-data",
+		"cli"
+	],
+	"homepage": "https://github.com/pexxi/ytj",
+	"bugs": {
+		"url": "https://github.com/pexxi/ytj/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pexxi/ytj.git"
+	},
+	"license": "MIT",
+	"author": "Pekka Kokkonen",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
+	"bin": {
+		"ytj": "dist/cli.js"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"cli-table3": "^0.6.5",
+		"commander": "^14.0.3",
+		"zod": "^4.3.6"
+	},
+	"devDependencies": {
+		"@types/node": "^25.6.0",
+		"tsup": "^8.5.1",
+		"typescript": "^6.0.3"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"module": "./dist/index.js"
 }
