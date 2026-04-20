@@ -1,6 +1,6 @@
 {
 	"name": "@pexxi/ytj",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"description": "CLI and library for the Finnish YTJ Business Information System API. Data provided by PRH (Finnish Patent and Registration Office) under CC BY 4.0.",
 	"keywords": [
 		"ytj",
