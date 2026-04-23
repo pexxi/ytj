@@ -1,4 +1,4 @@
-# @pexxi/ytj
+# @pexxi/prh-ytj
 
 CLI and Agent skill for the Finnish YTJ (Business Information System) open data API.
 
@@ -7,23 +7,23 @@ CLI and Agent skill for the Finnish YTJ (Business Information System) open data 
 Run any command without installing:
 
 ```bash
-npx @pexxi/ytj search --name "Gofore"
-npx @pexxi/ytj get 1710128-9
-npx @pexxi/ytj codes YRMU --lang fi
-npx @pexxi/ytj postcodes --lang fi
+npx @pexxi/prh-ytj search --name "Gofore"
+npx @pexxi/prh-ytj get 1710128-9
+npx @pexxi/prh-ytj codes YRMU --lang fi
+npx @pexxi/prh-ytj postcodes --lang fi
 ```
 
 ## Global Install
 
 ```bash
-npm install -g @pexxi/ytj
+npm install -g @pexxi/prh-ytj
 ```
 
-After installing globally, the `ytj` command is available directly:
+After installing globally, the `prh-ytj` command is available directly:
 
 ```bash
-ytj search --name "Gofore"
-ytj get 1710128-9
+prh-ytj search --name "Gofore"
+prh-ytj get 1710128-9
 ```
 
 ## CLI Commands
@@ -31,12 +31,12 @@ ytj get 1710128-9
 ### search -- Search companies
 
 ```bash
-ytj search --name "Gofore"
-ytj search --location "Helsinki" --company-form OY
-ytj search --business-line "62100" --page 2
-ytj search --post-code "00100"
-ytj search --reg-start 2024-01-01 --reg-end 2024-12-31
-ytj search --name "Kokko" --all
+prh-ytj search --name "Gofore"
+prh-ytj search --location "Helsinki" --company-form OY
+prh-ytj search --business-line "62100" --page 2
+prh-ytj search --post-code "00100"
+prh-ytj search --reg-start 2024-01-01 --reg-end 2024-12-31
+prh-ytj search --name "Kokko" --all
 ```
 
 By default, `search` returns only active companies (those without an `endDate`). Use `--all` to include ceased companies as well; in that mode the schema is relaxed to a best-effort parse so old records with missing fields still come through.
@@ -59,8 +59,8 @@ By default, `search` returns only active companies (those without an `endDate`).
 ### get -- Get company by business ID
 
 ```bash
-ytj get 1710128-9
-ytj get 1710128-9 --format compact
+prh-ytj get 1710128-9
+prh-ytj get 1710128-9 --format compact
 ```
 
 Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
@@ -72,8 +72,8 @@ Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
 ### codes -- Get code list descriptions
 
 ```bash
-ytj codes YRMU --lang fi
-ytj codes YRMU --lang en
+prh-ytj codes YRMU --lang fi
+prh-ytj codes YRMU --lang en
 ```
 
 Valid codes: `YRMU`, `REK_KDI`, `TLAJI`, `SELTILA`, `REK`, `VIRANOM`, `TLAHDE`, `KIELI`, `TOIMI`, `TOIMI2`, `TOIMI3`, `TOIMI4`, `KONK`, `SANE`, `STATUS3`.
@@ -85,7 +85,7 @@ Valid codes: `YRMU`, `REK_KDI`, `TLAJI`, `SELTILA`, `REK`, `VIRANOM`, `TLAHDE`, 
 ### postcodes -- Get postal codes
 
 ```bash
-ytj postcodes --lang fi
+prh-ytj postcodes --lang fi
 ```
 
 | Option | Description |
@@ -96,11 +96,11 @@ ytj postcodes --lang fi
 ## Library Usage
 
 ```bash
-npm install @pexxi/ytj
+npm install @pexxi/prh-ytj
 ```
 
 ```typescript
-import { YtjClient } from "@pexxi/ytj";
+import { YtjClient } from "@pexxi/prh-ytj";
 
 const client = new YtjClient();
 
@@ -130,7 +130,7 @@ All responses are validated with Zod and fully typed. Active-only searches use a
 Install the YTJ lookup skill for Claude Code or other AI coding agents:
 
 ```bash
-npx skills add pexxi/ytj
+npx skills add pexxi/prh-ytj
 ```
 
 ## Data License

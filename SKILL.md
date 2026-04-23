@@ -1,24 +1,24 @@
 ---
-name: ytj
-description: Look up Finnish company information from YTJ (Business Information System) using the ytj CLI. Use when the user asks about Finnish companies, business IDs (Y-tunnus), company registration data, or anything related to the Finnish Trade Register (kaupparekisteri).
+name: prh-ytj
+description: Look up Finnish company information from YTJ (Business Information System) using the prh-ytj CLI. Use when the user asks about Finnish companies, business IDs (Y-tunnus), company registration data, or anything related to the Finnish Trade Register (kaupparekisteri).
 ---
 
 # YTJ Company Lookup
 
-Use the `ytj` CLI to look up Finnish company information from the YTJ (Business Information System) open data API.
+Use the `prh-ytj` CLI to look up Finnish company information from the YTJ (Business Information System) open data API.
 
 ## Prerequisites
 
-The `ytj` CLI must be installed: `npm install -g @pexxi/ytj`. Remember to verify from the user if they want to install the CLI.
+The `prh-ytj` CLI must be installed: `npm install -g @pexxi/prh-ytj`. Remember to verify from the user if they want to install the CLI.
 
-Alternatively, `ytj` CLI can be used without installing: `npx @pexxi/ytj`. In this case, replace `ytj` with `npx @pexxi/ytj` in the examples below.
+Alternatively, `prh-ytj` CLI can be used without installing: `npx @pexxi/prh-ytj`. In this case, replace `prh-ytj` with `npx @pexxi/prh-ytj` in the examples below.
 
 ## Commands
 
 ### Search companies by name
 
 ```bash
-ytj search --name "Company Name" --format compact
+prh-ytj search --name "Company Name" --format compact
 ```
 
 Options: `--name`, `--location`, `--company-form`, `--business-line`, `--post-code`, `--reg-start`, `--reg-end`, `--page`, `--all`, `--format (compact|table|json)`
@@ -30,7 +30,7 @@ By default, only active companies are returned. Add `--all` to include ceased co
 ### Get company by business ID (Y-tunnus)
 
 ```bash
-ytj get 1710128-9 --format compact
+prh-ytj get 1710128-9 --format compact
 ```
 
 Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
@@ -38,7 +38,7 @@ Business ID format: `NNNNNNN-N` (7 digits, dash, check digit).
 ### Get code descriptions
 
 ```bash
-ytj codes YRMU --lang fi
+prh-ytj codes YRMU --lang fi
 ```
 
 Valid codes: YRMU (company forms), REK_KDI, TLAJI, SELTILA, REK, VIRANOM, TLAHDE, KIELI, TOIMI, KONK, SANE, STATUS3.
@@ -48,7 +48,7 @@ Languages: fi, sv, en.
 ### Get postal codes
 
 ```bash
-ytj postcodes --lang fi --format compact
+prh-ytj postcodes --lang fi --format compact
 ```
 
 ## When to use
