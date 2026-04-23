@@ -1,5 +1,5 @@
 {
-	"name": "@pexxi/ytj",
+	"name": "@pexxi/prh-ytj",
 	"version": "0.2.0",
 	"description": "CLI and library for the Finnish YTJ Business Information System API. Data provided by PRH (Finnish Patent and Registration Office) under CC BY 4.0.",
 	"keywords": [
@@ -12,13 +12,13 @@
 		"open-data",
 		"cli"
 	],
-	"homepage": "https://github.com/pexxi/ytj",
+	"homepage": "https://github.com/pexxi/prh-ytj",
 	"bugs": {
-		"url": "https://github.com/pexxi/ytj/issues"
+		"url": "https://github.com/pexxi/prh-ytj/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/pexxi/ytj.git"
+		"url": "git+https://github.com/pexxi/prh-ytj.git"
 	},
 	"license": "MIT",
 	"author": "Pekka Kokkonen",
@@ -38,7 +38,7 @@
 	"main": "./dist/index.cjs",
 	"types": "./dist/index.d.ts",
 	"bin": {
-		"ytj": "dist/cli.js"
+		"prh-ytj": "dist/cli.js"
 	},
 	"files": [
 		"dist"
@@ -47,7 +47,7 @@
 		"build": "tsup",
 		"dev": "tsup --watch",
 		"typecheck": "tsc --noEmit",
-		"ytj": "node dist/cli.js"
+		"prh-ytj": "node dist/cli.js"
 	},
 	"dependencies": {
 		"cli-table3": "^0.6.5",

@@ -5,7 +5,7 @@ import { codesCommand } from "./commands/codes.js";
 import { postcodesCommand } from "./commands/postcodes.js";
 
 program
-  .name("ytj")
+  .name("prh-ytj")
   .description(
     "Finnish YTJ Business Information System CLI\nData: PRH (Finnish Patent and Registration Office), CC BY 4.0",
   )
